@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Flip Login / Signup UI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #333333 , #333333 );
+        }
+
+        /* WRAPPER */
+        .wrapper {
+            width: 380px;
+            perspective: 1200px;
+        }
+
+        /* CARD */
+        .card {
+            width: 100%;
+            height: 520px;
+            position: relative;
+            transition: 0.9s ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        .card.flip {
+            transform: rotateY(180deg);
+        }
+
+        /* FACES */
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 45px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(18px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 40px rgba(0,0,0,0.25);
+            backface-visibility: hidden;
+        }
+
+        .back { transform: rotateY(180deg); }
+
+        /* TITLE */
+        .title {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+
+        /* INPUT GROUP */
+        .input-group {
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 10px;
+            font-size: 16px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #ccc;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 15px;
+            color: #ddd;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group input:valid {
+            border-bottom-color: #fff;
+        }
+
+        .input-group input:focus ~ label,
+        .input-group input:valid ~ label {
+            top: -6px;
+            font-size: 13px;
+            color: #fff;
+        }
+
+        /* BUTTON */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #ffffff, #e8e8e8);
+            color: #5A2BE7;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+            transform: scale(1.05);
+        }
+
+        /* SWITCH */
+        .switch {
+            margin-top: 20px;
+            text-align: center;
+            color: #eee;
+            font-size: 14px;
+        }
+
+        .switch span {
+            color: #fff;
+            font-weight: 600;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="card" id="card">
+
+            <!-- LOGIN PAGE -->
+            <div class="face front">
+                <h2 class="title">Welcome Back</h2>
+
+                <div class="input-group">
+                    <input type="email" required>
+                    <label>Email Address</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+
+                <button class="btn">Sign In</button>
+
+                <p class="switch">
+                    New here? <span id="showSignup">Create Account</span>
+                </p>
+            </div>
+
+            <!-- SIGNUP PAGE -->
+            <div class="face back">
+                <h2 class="title">Create Account</h2>
+
+                <div class="input-group">
+                    <input type="text" required>
+                    <label>Full Name</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" required>
+                    <label>Email Address</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+
+                <button class="btn">Sign Up</button>
+
+                <p class="switch">
+                    Already have an account? <span id="showLogin">Sign In</span>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let card = document.getElementById("card");
+        let showSignup = document.getElementById("showSignup");
+        let showLogin = document.getElementById("showLogin");
+
+        showSignup.onclick = () => { card.classList.add("flip"); };
+        showLogin.onclick = () => { card.classList.remove("flip"); };
+    </script>
+
+</body>
+</html>
